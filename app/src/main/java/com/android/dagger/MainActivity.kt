@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.android.dagger.data.Computer
+import com.android.dagger.data.MySecondComputer
 import com.android.dagger.di.App
 import com.android.dagger.di.DaggerAppComponent
 import javax.inject.Inject
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var textView: TextView
     @Inject lateinit var greeting:String
     @Inject lateinit var date:Integer
+    @Inject lateinit var second_computer:MySecondComputer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         (application as App).component.getSubComponent().getNumber(12).build().inject(this)
         computer.turnOn()
         textView.text = date.toString()
+        second_computer.turnOff()
 
     }
 }
