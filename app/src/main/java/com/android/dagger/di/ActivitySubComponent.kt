@@ -9,11 +9,10 @@ import javax.inject.Named
 @Subcomponent(modules = [ActivityModule::class])
 interface ActivitySubComponent {
 
-    @Subcomponent.Builder
+    @Subcomponent.Factory
     interface Builder {
-        @BindsInstance
-        fun getNumber(@Named("bound")date:Int) : Builder
-        fun build() : ActivitySubComponent
+
+        fun create(@BindsInstance @Named("bound") value:Int) : ActivitySubComponent
     }
     fun inject(activity:MainActivity)
 }

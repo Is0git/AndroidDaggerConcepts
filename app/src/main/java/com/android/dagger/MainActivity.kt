@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textView = findViewById(R.id.textView)
-        (application as App).component.getSubComponent().getNumber(12).build().inject(this)
+        (application as App).component.getSubComponent().create(15).inject(this)
         computer.turnOn()
         textView.text = date.toString()
         second_computer.turnOff()
