@@ -1,18 +1,11 @@
 package com.android.dagger.di
 
 import com.android.dagger.MainActivity
-import dagger.BindsInstance
 import dagger.Subcomponent
-import javax.inject.Named
+import dagger.android.AndroidInjector
 
-@ActivityScope
-@Subcomponent(modules = [ActivityModule::class])
-interface ActivitySubComponent {
-
+@Subcomponent(modules = [AppModule::class])
+interface ActivitySubComponent : AndroidInjector<MainActivity> {
     @Subcomponent.Factory
-    interface Builder {
-
-        fun create(@BindsInstance @Named("bound") value:Int) : ActivitySubComponent
-    }
-    fun inject(activity:MainActivity)
+    interface Factory : AndroidInjector.Factory<MainActivity>
 }

@@ -1,23 +1,20 @@
 package com.android.dagger.di
 
-import com.android.dagger.data.Box
-import com.android.dagger.data.Monitor
-import com.android.dagger.data.MySecondComputer
+import android.app.Activity
+import com.android.dagger.MainActivity
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import javax.inject.Named
+import dagger.Subcomponent
+import dagger.android.AndroidInjector
+import dagger.multibindings.ClassKey
+import dagger.multibindings.IntoMap
 
 @Module
-object ActivityModule {
-    @Provides
-    @ActivityScope
-    @JvmStatic
-    fun getDate(@Named("bound")number:Int) : Int {
-        return number
-    }
+abstract class ActivityModule {
+    @Binds
+    @IntoMap
+    @ClassKey(MainActivity::class)
+    abstract fun bindUserActivity(subcomponent: ActivitySubComponent.Factory) : AndroidInjector.Factory<out Any>
 
-    @Provides
-    @ActivityScope
-    @JvmStatic
-    fun getPc(box: Box, monitor: Monitor) = MySecondComputer(monitor, box)
+
 }

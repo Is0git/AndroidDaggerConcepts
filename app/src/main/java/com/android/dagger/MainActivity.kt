@@ -7,22 +7,29 @@ import com.android.dagger.data.Computer
 import com.android.dagger.data.MySecondComputer
 import com.android.dagger.di.App
 import com.android.dagger.di.DaggerAppComponent
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.multibindings.IntoMap
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
+
     @Inject
     lateinit var computer:Computer
     lateinit var textView: TextView
     @Inject lateinit var greeting:String
-    @Inject lateinit var date:Integer
+
+
     @Inject lateinit var second_computer:MySecondComputer
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         textView = findViewById(R.id.textView)
-        (application as App).component.getSubComponent().create(15).inject(this)
+
         computer.turnOn()
-        textView.text = date.toString()
+        textView.text = greeting
         second_computer.turnOff()
 
     }
